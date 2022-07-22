@@ -8,6 +8,14 @@ const io = require("socket.io")(server, {
   },
 });
 
+io.on("connection", (socket) => {
+  socket.emit("hello", "world");
+
+  socket.on("howdy", (arg) => {
+    console.log(arg);
+  });
+});
+
 app.use(cors());
 const PORT = process.env.PORT || 8000;
 
