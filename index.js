@@ -9,10 +9,16 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (socket) => {
-  socket.emit("hello", "world");
+  socket.emit("me", socket.id);
 
-  socket.on("howdy", (arg) => {
-    console.log(arg);
+  socket.on("disconnect", () => {
+    socket.broadcast.emit("callEnded");
+  });
+  socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+    io.to(userToCall).emit("callUser", { signal: signalData, from, name });
+  });
+  socket.on("answerCall", (data) => {
+    io.to(data.to).emit("callAccepted", data.signal);
   });
 });
 
