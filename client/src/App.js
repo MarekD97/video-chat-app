@@ -1,11 +1,12 @@
 import React from "react";
-import WebCamera from "./WebCamera";
+import { SocketContextProvider } from "./context/SocketContext";
+import VideoPlayer from "./components/VideoPlayer";
 
 const App = () => {
   return (
-    <div>
-      <WebCamera />
-    </div>
+    <SocketContextProvider>
+      <VideoPlayer />
+    </SocketContextProvider>
   );
 };
 
