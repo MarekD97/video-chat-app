@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
@@ -26,6 +26,8 @@ const buttonStyle = {
 const Controls = () => {
   const { leaveCall } = useContext(SocketContext);
 
+  const [callSeconds, setCallSeconds] = useState(0);
+
   const [collapsed, setCollapsed] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [audioEnabled, setAudioEnabled] = useState(true);
@@ -34,8 +36,26 @@ const Controls = () => {
   const handleVideoCamClick = () => setVideoEnabled((prev) => !prev);
   const handleAudioClick = () => setAudioEnabled((prev) => !prev);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCallSeconds((seconds) => seconds + 1);
+      console.log("X");
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const getCallTime = () => {
+    const seconds = (callSeconds % 60).toFixed(0);
+    const minutes = (callSeconds / 60).toFixed(0);
+
+    const convertToDigits = (num) => (num < 10 ? "0" + num : num);
+
+    return `${convertToDigits(minutes)}:${convertToDigits(seconds)}`;
+  };
+
   return (
-    <div>
+    <>
       <Box
         display="flex"
         justifyContent="space-evenly"
@@ -53,7 +73,7 @@ const Controls = () => {
         </Fab>
         <Fab color="error" variant="extended" onClick={leaveCall}>
           <CallEndIcon sx={{ mr: 1 }} />
-          <p>05:12</p>
+          <p style={{ width: "5ch", textAlign: "center" }}>{getCallTime()}</p>
         </Fab>
       </Box>
       {!collapsed && (
@@ -72,7 +92,7 @@ const Controls = () => {
           </Button>
         </Box>
       )}
-    </div>
+    </>
   );
 };
 
