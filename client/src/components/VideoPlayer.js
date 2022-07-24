@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import { SocketContext } from "../context/SocketContext";
+import React from "react";
 
 const VideoPlayer = ({ cameraRef, muted = false }) => {
   return (
@@ -8,9 +7,8 @@ const VideoPlayer = ({ cameraRef, muted = false }) => {
         style={{ padding: "0.5em", backgroundColor: "yellow" }}
         playsInline
         muted={muted}
+        width="100%"
         ref={cameraRef}
-        width="640"
-        height="480"
         autoPlay
       ></video>
     </div>
