@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 import CallIcon from "@mui/icons-material/Call";
 
@@ -9,25 +10,50 @@ import { SocketContext } from "../context/SocketContext";
 
 const CallUser = () => {
   const { callUser, myId, name, setName } = useContext(SocketContext);
+  const [callToUser, setCallToUser] = useState("");
+  const [copied, setCopied] = useState(false);
 
-  const handleChange = (event) => setName(event.target.value);
-  const handleClick = () => callUser(myId);
+  const handleNameChange = (event) => setName(event.target.value);
+  const handleCallToUserChange = (event) => setCallToUser(event.target.value);
+  const handleCopyClick = (event) => {
+    navigator.clipboard.writeText(myId);
+    setCopied(true);
+  };
+  const handleCallClick = () => callUser(callToUser);
   return (
     <Box
       display="flex"
+      flexDirection="column"
       justifyContent="space-between"
       gap={4}
       sx={{ backgroundColor: "white", padding: "1em", borderRadius: "0.5em" }}
     >
-      <TextField
-        variant="outlined"
-        label="Name"
-        value={name}
-        onChange={handleChange}
-      />
-      <Fab color="primary" onClick={handleClick}>
-        <CallIcon />
+      <Typography variant="h6" textAlign="center">
+        Your ID: {myId}
+      </Typography>
+      <Fab
+        color={copied ? "success" : "primary"}
+        variant="extended"
+        onClick={handleCopyClick}
+      >
+        Copy to clipboard
       </Fab>
+      <Box display="flex" justifyContent="space-between" gap={4}>
+        <TextField
+          variant="outlined"
+          label="Your name"
+          value={name}
+          onChange={handleNameChange}
+        />
+        <TextField
+          variant="outlined"
+          label="Id of user"
+          onChange={handleCallToUserChange}
+        />
+        <Fab color="primary" onClick={handleCallClick}>
+          <CallIcon />
+        </Fab>
+      </Box>
     </Box>
   );
 };
