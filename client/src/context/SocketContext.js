@@ -5,8 +5,8 @@ import Peer from "simple-peer";
 
 const SocketContext = createContext();
 
-// const socket = io("localhost:8000");
-const socket = io("https://server-video-chat-app.herokuapp.com/");
+const socket = io("localhost:8000");
+// const socket = io("https://server-video-chat-app.herokuapp.com/");
 
 const SocketContextProvider = ({ children }) => {
   const [stream, setStream] = useState(null);
@@ -25,12 +25,12 @@ const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     // get the current camera stream from the device
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-        myCameraRef.current.srcObject = currentStream;
-      });
+    // navigator.mediaDevices
+    //   .getUserMedia({ video: true, audio: true })
+    //   .then((currentStream) => {
+    //     setStream(currentStream);
+    //     myCameraRef.current.srcObject = currentStream;
+    //   });
 
     // get my id
     socket.on("me", (id) => setMyId(id));
@@ -96,6 +96,7 @@ const SocketContextProvider = ({ children }) => {
         myCameraRef,
         userCameraRef,
         stream,
+        setStream,
         name,
         setName,
         callEnded,

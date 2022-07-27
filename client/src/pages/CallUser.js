@@ -44,11 +44,13 @@ const CallUser = () => {
           label="Your name"
           value={name}
           onChange={handleNameChange}
+          autoComplete="off"
         />
         <TextField
           variant="outlined"
           label="Id of user"
           onChange={handleCallToUserChange}
+          autoComplete="off"
         />
         <Fab color="primary" onClick={handleCallClick}>
           <CallIcon />
