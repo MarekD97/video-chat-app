@@ -25,6 +25,7 @@ const CallUser = () => {
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
+      alignItems="center"
       gap={4}
       sx={{ backgroundColor: "white", padding: "1em", borderRadius: "0.5em" }}
     >
@@ -38,24 +39,22 @@ const CallUser = () => {
       >
         Copy to clipboard
       </Fab>
-      <Box display="flex" justifyContent="space-between" gap={4}>
-        <TextField
-          variant="outlined"
-          label="Your name"
-          value={name}
-          onChange={handleNameChange}
-          autoComplete="off"
-        />
-        <TextField
-          variant="outlined"
-          label="Id of user"
-          onChange={handleCallToUserChange}
-          autoComplete="off"
-        />
-        <Fab color="primary" onClick={handleCallClick}>
-          <CallIcon />
-        </Fab>
-      </Box>
+      <TextField
+        variant="outlined"
+        label="Your name"
+        value={name}
+        onChange={handleNameChange}
+        autoComplete="off"
+      />
+      <TextField
+        variant="outlined"
+        label="Id of user"
+        onChange={handleCallToUserChange}
+        autoComplete="off"
+      />
+      <Fab color="primary" onClick={handleCallClick}>
+        <CallIcon />
+      </Fab>
     </Box>
   );
 };

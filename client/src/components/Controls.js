@@ -39,7 +39,6 @@ const Controls = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCallSeconds((seconds) => seconds + 1);
-      console.log("X");
     }, 1000);
 
     return () => clearInterval(timer);

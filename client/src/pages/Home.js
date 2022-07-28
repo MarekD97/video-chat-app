@@ -41,7 +41,7 @@ const Home = () => {
       flexDirection="column"
       backgroundColor="primary.dark"
     >
-      <Box position="absolute" width="35%" right={0} padding="1em">
+      <Box position="absolute" width="12em" right={0} padding="1em">
         <VideoPlayer cameraRef={myCameraRef} muted rounded />
       </Box>
       <VideoPlayer cameraRef={userCameraRef} />
@@ -76,9 +76,6 @@ const Home = () => {
           <Controls />
         </Box>
       )}
-      <Link to="room" style={{ zIndex: 10 }}>
-        Room
-      </Link>
     </Box>
   );
 };
