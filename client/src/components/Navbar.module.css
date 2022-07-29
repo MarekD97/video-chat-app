@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6em 1em;
+    color: #000;
+    font-size: 2rem;
+    background-color: var(--alice-blue);
+    border-bottom: 0.1rem solid var(--middle-blue-green);
+}
+
+.brand{
+    font-weight: 700;
+}
+
+.menu {
+    background-color: #fff;
+    border-radius: 0.4em;
+}
+
+.menu-button {
+    padding: 0.8em;
+    width: 8em;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+[data-active="true"] {
+    color: #fff;
+    border-radius: 0.4em;
+    background-color: var(--ming);
+    transition: color 150ms ease-in-out;
+    transition: background-color 150ms ease-in-out;
+}
