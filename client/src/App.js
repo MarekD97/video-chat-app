@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Home from "./pages/Home";
+import Room from "./pages/Room";
 
 import "./styles.css";
 
@@ -10,7 +11,8 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="room" element={<Link to="/">back</Link>} />
+        <Route path="/room" element={<Room />} />
+        {/* <Route path="room" element={<Link to="/">back</Link>} /> */}
       </Routes>
     </BrowserRouter>
   );

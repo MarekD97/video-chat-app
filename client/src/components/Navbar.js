@@ -9,7 +9,7 @@ const buttons = [
 const Navbar = () => {
   const [selected, setSelected] = useState(0);
   return (
-    <nav className={styles["navbar"]}>
+    <nav className={styles["container"]}>
       <div className={styles["brand"]}>Video Conference Meeting</div>
       <div className={styles["menu"]}>
         {buttons.map((button) => (

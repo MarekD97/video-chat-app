@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import CallUser from "./CallUser";
 import AnswerCall from "./AnswerCall";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
   const {
@@ -35,48 +36,53 @@ const Home = () => {
   }, []);
 
   return (
-    <Box
-      height="100vh"
-      display="flex"
-      flexDirection="column"
-      backgroundColor="primary.dark"
-    >
-      <Box position="absolute" width="12em" right={0} padding="1em">
-        <VideoPlayer cameraRef={myCameraRef} muted rounded />
-      </Box>
-      <VideoPlayer cameraRef={userCameraRef} />
-      {!callAccepted && !call.isReceivedCall && (
-        <Box
-          position="absolute"
-          display="flex"
-          width="100%"
-          height="100vh"
-          top={0}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <CallUser />
+    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <Navbar />
+      {/* <Box
+        flex={1}
+        display="flex"
+        flexDirection="column"
+        backgroundColor="primary.dark"
+      >
+        <Box position="absolute" width="12em" right={0} padding="1em">
+          <VideoPlayer cameraRef={myCameraRef} muted rounded />
         </Box>
-      )}
-      {call.isReceivedCall && !callAccepted && (
-        <Box
-          position="absolute"
-          display="flex"
-          width="100%"
-          height="100vh"
-          top={0}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <AnswerCall />
-        </Box>
-      )}
-      {callAccepted && !callEnded && (
-        <Box position="absolute" bottom={0} width="100%">
-          <Controls />
-        </Box>
-      )}
-    </Box>
+        <VideoPlayer cameraRef={userCameraRef} />
+        {!callAccepted && !call.isReceivedCall && (
+          <Box
+            position="absolute"
+            display="flex"
+            width="100%"
+            height="100vh"
+            top={0}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <CallUser />
+          </Box>
+        )}
+        {call.isReceivedCall && !callAccepted && (
+          <Box
+            position="absolute"
+            display="flex"
+            width="100%"
+            height="100vh"
+            top={0}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <AnswerCall />
+          </Box>
+        )}
+        {callAccepted && !callEnded && (
+          <Box position="absolute" bottom={0} width="100%">
+            <Controls />
+          </Box>
+        )}
+      </Box> */}
+      <div style={{ flex: 1 }}></div>
+      <Controls />
+    </div>
   );
 };
 
