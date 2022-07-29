@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    padding: 0.6em 1em;
+    font-size: 2em;
+    background-color: var(--alice-blue);
+    border-top: 0.1rem solid var(--middle-blue-green);
+    border-left: 0.1rem solid var(--middle-blue-green);
+}
+
+.text-input {
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 0;
+    padding: 0.8em 1.2em;
+    background-color: #fff;
+    border: none;
+    border-radius: 0.4em;
+    outline: none;
+    box-shadow: 0.1rem 0.1rem 0.5rem -0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.submit-button {
+    font-size: 2rem;
+    line-height: 0;
+    padding: 0.6em;
+    color: #fff;
+    background-color: var(--ming);
+    border: 0.1rem solid var(--ming);
+    border-radius: 0.4em;
+    cursor: pointer;
+}

@@ -2,10 +2,12 @@ import React, { useContext, useEffect } from "react";
 
 import Navbar from "../components/Navbar";
 import Controls from "../components/Controls";
+import VideoPlayer from "../components/VideoPlayer";
+import TextInput from "../components/TextInput";
+
+import { SocketContext } from "../context/SocketContext";
 
 import styles from "./Room.module.css";
-import VideoPlayer from "../components/VideoPlayer";
-import { SocketContext } from "../context/SocketContext";
 
 const Room = () => {
   const { myId, setName, callUser, call, answerCall, callAccepted } =
@@ -25,10 +27,13 @@ const Room = () => {
           <Controls />
         </div>
         <div className={styles["text-chat"]}>
-          <button onClick={() => callUser(myId)}>CallUser</button>
+          <div>
+            {/* <button onClick={() => callUser(myId)}>CallUser</button>
           {call.isReceivedCall && !callAccepted && (
             <button onClick={() => answerCall()}>AnswerCall</button>
-          )}
+          )} */}
+          </div>
+          <TextInput />
         </div>
       </div>
     </div>
