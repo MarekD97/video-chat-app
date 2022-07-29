@@ -16,3 +16,7 @@
     --vermillion: #D22B2B;
 
 }
+
+button:hover {
+    opacity: 0.85;
+}

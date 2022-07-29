@@ -7,7 +7,7 @@
     font-size: 2rem;
     background-color: var(--alice-blue);
     border-top: 0.1rem solid var(--middle-blue-green);
-    gap: 1em
+    gap: 1em;
 }
 
 .control-button {

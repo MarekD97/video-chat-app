@@ -7,11 +7,12 @@ import {
   BiVideo,
   BiVideoOff,
   BiPhone,
+  BiShareAlt,
 } from "react-icons/bi";
 import { SocketContext } from "../context/SocketContext";
 
 const Controls = () => {
-  const { leaveCall } = useContext(SocketContext);
+  const { myId, leaveCall } = useContext(SocketContext);
 
   const [microphoneEnabled, setMicrophoneEnabled] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
@@ -19,6 +20,7 @@ const Controls = () => {
   const handleVideoSwitch = () => setVideoEnabled((prev) => !prev);
   const handleMicrophoneSwitch = () => setMicrophoneEnabled((prev) => !prev);
   const handleLeaveCall = () => leaveCall();
+  const handleShareLink = () => navigator.clipboard.writeText(myId);
 
   return (
     <div className={styles["container"]}>
@@ -36,6 +38,9 @@ const Controls = () => {
         onClick={handleLeaveCall}
       >
         <BiPhone />
+      </button>
+      <button className={styles["control-button"]} onClick={handleShareLink}>
+        <BiShareAlt />
       </button>
     </div>
   );
