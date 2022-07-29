@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Controls from "../components/Controls";
 import VideoPlayer from "../components/VideoPlayer";
 import TextInput from "../components/TextInput";
+import TextChat from "../components/TextChat";
 
 import { SocketContext } from "../context/SocketContext";
 
@@ -27,12 +28,7 @@ const Room = () => {
           <Controls />
         </div>
         <div className={styles["text-chat"]}>
-          <div>
-            {/* <button onClick={() => callUser(myId)}>CallUser</button>
-          {call.isReceivedCall && !callAccepted && (
-            <button onClick={() => answerCall()}>AnswerCall</button>
-          )} */}
-          </div>
+          <TextChat />
           <TextInput />
         </div>
       </div>
