@@ -24,14 +24,6 @@ const SocketContextProvider = ({ children }) => {
   const connectionRef = useRef();
 
   useEffect(() => {
-    // get the current camera stream from the device
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-        myCameraRef.current.srcObject = currentStream;
-      });
-
     // get my id
     socket.on("me", (id) => setMyId(id));
 
@@ -42,6 +34,7 @@ const SocketContextProvider = ({ children }) => {
   }, []);
 
   const answerCall = () => {
+    console.log("answer call");
     setCallAccepted(true);
 
     const peer = new Peer({ initiator: false, trickle: false, stream });
@@ -59,6 +52,7 @@ const SocketContextProvider = ({ children }) => {
     connectionRef.current = peer;
   };
   const callUser = (id) => {
+    console.log("call user", id);
     const peer = new Peer({ initiator: true, trickle: false, stream });
 
     peer.on("signal", (data) => {
@@ -76,7 +70,7 @@ const SocketContextProvider = ({ children }) => {
 
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
-
+      console.log("call accepted");
       peer.signal(signal);
     });
 
@@ -85,7 +79,7 @@ const SocketContextProvider = ({ children }) => {
   const leaveCall = () => {
     setCallEnded(true);
     connectionRef.current.destroy();
-    window.location.reload();
+    window.location.pathname = "/";
   };
 
   return (

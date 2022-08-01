@@ -37,3 +37,18 @@
 .button:hover {
     opacity: 0.85;
 }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.input {
+    padding: 1em;
+    font-size: 1.6rem;
+    border: 0.1rem solid var(--ming);
+    border-radius: 0.4em;
+    width: 30ch;
+}

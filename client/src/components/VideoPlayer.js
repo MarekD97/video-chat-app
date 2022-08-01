@@ -10,13 +10,12 @@ const Video = ({ videoRef, username }) => (
 );
 
 const VideoPlayer = () => {
-  const { myCameraRef, userCameraRef, callAccepted, call } =
-    useContext(SocketContext);
+  const { myCameraRef, userCameraRef, call } = useContext(SocketContext);
 
   return (
     <div className={styles["container"]}>
       <Video videoRef={myCameraRef} username="You" />
-      {callAccepted && <Video videoRef={userCameraRef} username={call.name} />}
+      <Video videoRef={userCameraRef} username={call.name} />
     </div>
   );
 };
