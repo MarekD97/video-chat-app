@@ -1,20 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 
-import { SocketContext } from "../context/SocketContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styles from "./Home.module.css";
 import Navbar from "../components/Navbar";
 
 const Home = () => {
-  const { createRoom, roomId } = useContext(SocketContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (roomId !== "") navigate(`/room/${roomId}`);
-  }, [roomId]);
-
-  const handleCreateRoom = () => createRoom();
+  const handleCreateRoom = () => {};
 
   return (
     <div className={styles["container"]}>

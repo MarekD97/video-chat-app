@@ -11,17 +11,9 @@ import { SocketContext } from "../context/SocketContext";
 import styles from "./Room.module.css";
 
 const Room = () => {
-  const { myId, setName, callUser, call, answerCall, callAccepted } =
-    useContext(SocketContext);
-
-  useEffect(() => {
-    console.log(myId);
-    setName("Ktoś");
-  }, [myId]);
-
   return (
     <div className={styles["container"]}>
-      <Navbar />
+      <Navbar showMenu />
       <div className={styles["content"]}>
         <div className={styles["video-chat"]}>
           <VideoPlayer />

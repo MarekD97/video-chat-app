@@ -17,7 +17,6 @@ const VideoPlayer = () => {
     <div className={styles["container"]}>
       <Video videoRef={myCameraRef} username="You" />
       {callAccepted && <Video videoRef={userCameraRef} username={call.name} />}
-      {}
     </div>
   );
 };
