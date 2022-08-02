@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { SocketContext } from "../context/SocketContext";
 import styles from "./VideoPlayer.module.css";
 
-const Video = ({ videoRef, username }) => (
+const Video = ({ videoRef, username, muted = false }) => (
   <div className={styles["video-frame"]}>
     <video ref={videoRef} playsInline muted autoPlay />
     <span className={styles["video-username"]}>{username}</span>
@@ -14,7 +14,7 @@ const VideoPlayer = () => {
 
   return (
     <div className={styles["container"]}>
-      <Video videoRef={myCameraRef} username="You" />
+      <Video videoRef={myCameraRef} username="You" muted />
       <Video videoRef={userCameraRef} username={call.name} />
     </div>
   );

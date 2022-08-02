@@ -17,6 +17,14 @@
 .menu {
     background-color: #fff;
     border-radius: 0.4em;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 480px) {
+    .menu {
+        flex-direction: row;
+    }
 }
 
 .menu-button {
