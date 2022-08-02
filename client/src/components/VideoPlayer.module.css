@@ -1,0 +1,32 @@
+.container {
+    display: grid;
+  grid-template-columns: repeat(3, minmax(min-content, max-content));
+    align-items: center;
+    grid-gap: 1em;
+    padding: 2em;
+    flex: 1;
+}
+
+.video-frame {
+    position: relative;
+    margin: auto;
+}
+
+.video-frame video { 
+    width: 100%;
+    border-radius: 0.8em;
+    object-fit: contain;
+}
+
+.video-username {
+    position: absolute;
+    color: #fff;
+    font-size: 2rem;
+    padding: 0.4em;
+    min-width: 4em;
+    right: 1em;
+    bottom: 1em;
+    background-color: #00000065;
+    text-align: center;
+    border-radius: 0.3em;
+}

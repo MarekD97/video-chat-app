@@ -1,85 +1,70 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { SocketContext } from "../context/SocketContext";
-import VideoPlayer from "../components/VideoPlayer";
-import Controls from "../components/Controls";
 
-import Box from "@mui/material/Box";
-
-import CallUser from "./CallUser";
-import AnswerCall from "./AnswerCall";
-import { Link } from "react-router-dom";
+import styles from "./Home.module.css";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
-  const {
-    myCameraRef,
-    userCameraRef,
-    stream,
-    callUser,
-    myId,
-    answerCall,
-    setStream,
-    callAccepted,
-    callEnded,
-    call,
-  } = useContext(SocketContext);
+  const { myId } = useContext(SocketContext);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    // get the current camera stream from the device
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-        myCameraRef.current.srcObject = currentStream;
-      });
-  }, []);
+  const [displayJoinRoomForm, setDisplayJoinRoomForm] = useState(false);
+  const [roomId, setRoomId] = useState("");
+
+  const handleCreateRoom = () => {
+    navigate(`/room/${myId}`);
+  };
+  const handleJoinRoom = () => setDisplayJoinRoomForm(true);
+  const handleSubmitJoinRoom = (event) => {
+    event.preventDefault();
+    navigate(`/room/${roomId}`);
+  };
+  const handleRoomInput = (event) => setRoomId(event.target.value);
+  const handlePaste = async (event) => {
+    event.preventDefault();
+    const clipboardText = await navigator.clipboard.readText();
+    setRoomId(clipboardText);
+  };
 
   return (
-    <Box
-      height="100vh"
-      display="flex"
-      flexDirection="column"
-      backgroundColor="primary.dark"
-    >
-      <Box position="absolute" width="35%" right={0} padding="1em">
-        <VideoPlayer cameraRef={myCameraRef} muted rounded />
-      </Box>
-      <VideoPlayer cameraRef={userCameraRef} />
-      {!callAccepted && !call.isReceivedCall && (
-        <Box
-          position="absolute"
-          display="flex"
-          width="100%"
-          height="100vh"
-          top={0}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <CallUser />
-        </Box>
-      )}
-      {call.isReceivedCall && !callAccepted && (
-        <Box
-          position="absolute"
-          display="flex"
-          width="100%"
-          height="100vh"
-          top={0}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <AnswerCall />
-        </Box>
-      )}
-      {callAccepted && !callEnded && (
-        <Box position="absolute" bottom={0} width="100%">
-          <Controls />
-        </Box>
-      )}
-      <Link to="room" style={{ zIndex: 10 }}>
-        Room
-      </Link>
-    </Box>
+    <div className={styles["container"]}>
+      <Navbar />
+      <div className={styles["content"]}>
+        {displayJoinRoomForm ? (
+          <form className={styles["form"]} onSubmit={handleSubmitJoinRoom}>
+            <input
+              className={styles["input"]}
+              type="text"
+              placeholder="Enter your room ID"
+              name="roomId"
+              onChange={handleRoomInput}
+              value={roomId}
+            />
+            <button className={styles["button"]} onClick={handlePaste}>
+              Paste
+            </button>
+            <input
+              className={styles["button"]}
+              type="submit"
+              value="Enter the room"
+            />
+          </form>
+        ) : (
+          <>
+            <h1 className={styles["header"]}>Start Video Chat</h1>
+            <button className={styles["button"]} onClick={handleCreateRoom}>
+              Create a room
+            </button>
+            <div>or</div>
+            <button className={styles["button"]} onClick={handleJoinRoom}>
+              Join a room
+            </button>
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 

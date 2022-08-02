@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SocketContext } from "../context/SocketContext";
+import styles from "./VideoPlayer.module.css";
 
-const VideoPlayer = ({ cameraRef, muted = false, rounded = false }) => {
-  const videoStyle = {
-    aspectRatio: "1/1",
-    objectFit: "cover",
-    borderRadius: "50%",
-    border: "0.25em solid white",
-  };
+const Video = ({ videoRef, username }) => (
+  <div className={styles["video-frame"]}>
+    <video ref={videoRef} playsInline muted autoPlay />
+    <span className={styles["video-username"]}>{username}</span>
+  </div>
+);
+
+const VideoPlayer = () => {
+  const { myCameraRef, userCameraRef, call } = useContext(SocketContext);
+
   return (
-    <video
-      playsInline
-      muted={muted}
-      width="100%"
-      style={rounded ? videoStyle : { height: "100%", objectFit: "cover" }}
-      ref={cameraRef}
-      autoPlay
-    ></video>
+    <div className={styles["container"]}>
+      <Video videoRef={myCameraRef} username="You" />
+      <Video videoRef={userCameraRef} username={call.name} />
+    </div>
   );
 };
 
