@@ -13,8 +13,16 @@ import styles from "./Room.module.css";
 
 const Room = () => {
   const { roomId } = useParams();
-  const { myId, callUser, answerCall, call, myCameraRef, setStream } =
-    useContext(SocketContext);
+  const {
+    myId,
+    callUser,
+    answerCall,
+    call,
+    myCameraRef,
+    setStream,
+    callAccepted,
+    stream,
+  } = useContext(SocketContext);
 
   useEffect(() => {
     // get the current camera stream from the device
@@ -24,12 +32,16 @@ const Room = () => {
         setStream(currentStream);
         myCameraRef.current.srcObject = currentStream;
       });
-    if (roomId !== myId) callUser(roomId);
   }, []);
 
   useEffect(() => {
-    if (call && call.isReceivedCall) answerCall();
-  }, [call]);
+    const hasId = myId !== "";
+    const isHost = roomId === myId;
+    // call user if joining the room
+    if (hasId && !isHost && stream) callUser(roomId);
+    // answer call if somebody is joining the room
+    if (call && call.isReceivedCall && !callAccepted) answerCall();
+  }, [stream, call]);
 
   return (
     <div className={styles["container"]}>
