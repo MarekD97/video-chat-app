@@ -12,13 +12,21 @@ import {
 import { SocketContext } from "../context/SocketContext";
 
 const Controls = () => {
-  const { myId, leaveCall } = useContext(SocketContext);
+  const { myId, leaveCall, myCameraRef } = useContext(SocketContext);
 
   const [microphoneEnabled, setMicrophoneEnabled] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
 
-  const handleVideoSwitch = () => setVideoEnabled((prev) => !prev);
-  const handleMicrophoneSwitch = () => setMicrophoneEnabled((prev) => !prev);
+  const handleVideoSwitch = () => {
+    const stream = myCameraRef.current.srcObject;
+    stream.getVideoTracks()[0].enabled = !videoEnabled;
+    setVideoEnabled((prev) => !prev);
+  };
+  const handleMicrophoneSwitch = () => {
+    const stream = myCameraRef.current.srcObject;
+    stream.getAudioTracks()[0].enabled = !microphoneEnabled;
+    setMicrophoneEnabled((prev) => !prev);
+  };
   const handleLeaveCall = () => leaveCall();
   const handleShareLink = () => navigator.clipboard.writeText(myId);
 
