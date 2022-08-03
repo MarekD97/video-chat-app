@@ -20,6 +20,7 @@ const TextInput = () => {
         type="text"
         name="message"
         placeholder="Type a message"
+        autoComplete="off"
       />
       <button className={styles["submit-button"]} type="submit">
         <BiSend />
