@@ -18,6 +18,8 @@ const SocketContextProvider = ({ children }) => {
 
   const [name, setName] = useState("");
 
+  const [messages, setMessages] = useState([]);
+
   const myCameraRef = useRef();
   const userCameraRef = useRef();
 
@@ -30,6 +32,9 @@ const SocketContextProvider = ({ children }) => {
     // call to user
     socket.on("callUser", ({ from, name, signal }) => {
       setCall({ isReceivedCall: true, from, name, signal });
+    });
+    socket.on("sendMessage", ({ username, message }) => {
+      setMessages((prev) => [...prev, { from: username, msg: message }]);
     });
   }, []);
 
@@ -78,6 +83,10 @@ const SocketContextProvider = ({ children }) => {
     connectionRef.current.destroy();
     window.location.pathname = "/";
   };
+  const sendMessage = (message) => {
+    if (message === "") return;
+    socket.emit("sendMessage", { username: myId, message });
+  };
 
   return (
     <SocketContext.Provider
@@ -95,6 +104,8 @@ const SocketContextProvider = ({ children }) => {
         callUser,
         leaveCall,
         answerCall,
+        messages,
+        sendMessage,
       }}
     >
       {children}

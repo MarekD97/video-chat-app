@@ -4,7 +4,7 @@ import styles from "./VideoPlayer.module.css";
 
 const Video = ({ videoRef, username, muted = false }) => (
   <div className={styles["video-frame"]}>
-    <video ref={videoRef} playsInline muted autoPlay />
+    <video ref={videoRef} playsInline muted={muted} autoPlay />
     <span className={styles["video-username"]}>{username}</span>
   </div>
 );

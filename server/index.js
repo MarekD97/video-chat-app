@@ -20,6 +20,10 @@ io.on("connection", (socket) => {
   socket.on("answerCall", (data) => {
     io.to(data.to).emit("callAccepted", data.signal);
   });
+
+  socket.on("sendMessage", ({ username, message }) => {
+    io.emit("sendMessage", { username, message });
+  });
 });
 
 app.use(cors());

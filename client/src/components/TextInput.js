@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BiSend } from "react-icons/bi";
+import { SocketContext } from "../context/SocketContext";
 
 import styles from "./TextInput.module.css";
 
 const TextInput = () => {
+  const { sendMessage } = useContext(SocketContext);
+
   const handleSendMessage = (event) => {
     event.preventDefault();
-    console.log(event.target.message.value);
+    const message = event.target.message.value;
+    event.target.reset();
+    sendMessage(message);
   };
   return (
     <form className={styles["container"]} onSubmit={handleSendMessage}>

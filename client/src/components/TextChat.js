@@ -1,25 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import { SocketContext } from "../context/SocketContext";
 
 import styles from "./TextChat.module.css";
 
-const messages = [
-  { from: "user1", msg: "Hello, How are you?" },
-  { from: "user1", msg: "What are you doing now?" },
-  { from: "user2", msg: "I'm good & How are you?" },
-  {
-    from: "me",
-    msg: "I will join in just 15 minutes. I have one priority task.",
-  },
-  { from: "user1", msg: "Okay. No problem" },
-  { from: "user1", msg: "Hello, How are you?" },
-  { from: "user1", msg: "What are you doing now?" },
-  { from: "user2", msg: "I'm good & How are you?" },
-  { from: "me", msg: "I'm good & How are you?" },
-  { from: "me", msg: "I'm good & How are you?" },
-  { from: "me", msg: "I'm good & How are you?" },
-];
-
 const TextChat = () => {
+  const { messages, myId } = useContext(SocketContext);
   const wrapperRef = useRef();
 
   useEffect(() => {
@@ -29,7 +14,7 @@ const TextChat = () => {
     const clientHeight = element.getBoundingClientRect().height;
 
     element.scrollTop = scrollHeight - clientHeight;
-  }, []);
+  }, [messages]);
   return (
     <div className={styles["container"]}>
       <div className={styles["content-wrapper"]} ref={wrapperRef}>
@@ -38,10 +23,10 @@ const TextChat = () => {
             key={index}
             className={[
               styles["content"],
-              from === "me" ? styles["my-message"] : "",
+              from === myId ? styles["my-message"] : "",
             ].join(" ")}
           >
-            <div className={styles["from"]}>{from}</div>
+            {/* <div className={styles["from"]}>{from}</div> */}
             <div className={styles["message"]}>{msg}</div>
           </div>
         ))}
