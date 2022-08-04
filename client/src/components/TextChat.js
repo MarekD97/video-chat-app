@@ -26,7 +26,7 @@ const TextChat = () => {
               from === myId ? styles["my-message"] : "",
             ].join(" ")}
           >
-            {/* <div className={styles["from"]}>{from}</div> */}
+            <div className={styles["from"]}>{from}</div>
             <div className={styles["message"]}>{msg}</div>
           </div>
         ))}

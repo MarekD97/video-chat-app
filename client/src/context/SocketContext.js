@@ -85,7 +85,7 @@ const SocketContextProvider = ({ children }) => {
   };
   const sendMessage = (message) => {
     if (message === "") return;
-    socket.emit("sendMessage", { username: myId, message });
+    socket.emit("sendMessage", { username: name, message });
   };
 
   return (

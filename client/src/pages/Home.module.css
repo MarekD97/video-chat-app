@@ -45,10 +45,15 @@
     align-items: center;
 }
 
+.form-row {
+    display: flex;
+    gap: 1em;
+}
+
 .input {
     padding: 1em;
     font-size: 1.6rem;
     border: 0.1rem solid var(--ming);
     border-radius: 0.4em;
-    width: 30ch;
+    width: 100%;
 }
