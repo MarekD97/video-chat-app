@@ -44,7 +44,7 @@ const SocketContextProvider = ({ children }) => {
     const peer = new Peer({ initiator: false, trickle: false, stream });
 
     peer.on("signal", (data) => {
-      socket.emit("answerCall", { signal: data, to: call.from });
+      socket.emit("answerCall", { signal: data, to: call.from, name });
     });
 
     peer.on("stream", (currentStream) => {
@@ -71,8 +71,9 @@ const SocketContextProvider = ({ children }) => {
       userCameraRef.current.srcObject = currentStream;
     });
 
-    socket.on("callAccepted", (signal) => {
+    socket.on("callAccepted", (signal, name) => {
       setCallAccepted(true);
+      setCall({ name });
       peer.signal(signal);
     });
 
